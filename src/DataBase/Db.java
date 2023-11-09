@@ -9,6 +9,8 @@ import Authentication.User;
 
 public abstract class Db {
     String name, password;
+    //Note: This path is for my computer, you should change it to your own path
+    String filePath = "C:\\Users\\DELL\\Documents\\GitHub\\instaPaySystem\\src\\Clients.txt";
    public User user;
     public Db(String name, String password) {
         this.name = name;
@@ -17,7 +19,7 @@ public abstract class Db {
     }
 
 
-    String filePath = "D:\\Projects\\instaPaySystem\\src\\DataBase\\Clients.txt";
+
 
     public void main(String[] args) {
         // Example usage: Read data from a file

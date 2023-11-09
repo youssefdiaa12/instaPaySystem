@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class RegisterationDb extends Db {
 
-String filePath = "D:\\Projects\\instaPaySystem\\src\\DataBase\\Clients.txt";
+//String filePath = "D:\\Projects\\instaPaySystem\\src\\DataBase\\Clients.txt";
 String phone;
 String email;
 String name;
