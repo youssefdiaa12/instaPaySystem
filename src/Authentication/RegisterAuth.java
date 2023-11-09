@@ -1,3 +1,5 @@
+package Authentication;
+
 public abstract class RegisterAuth extends UserAuthentication {
     @Override
     public void Perform_Authentication( String email, String password) {}

@@ -1,10 +1,15 @@
+package Authentication;
+
+import Authentication.UserAuthentication;
+import DataBase.Account;
+
 public class User {
-    UserAuthentication userAuth;
+    public UserAuthentication userAuth;
     Account userAcc;
-    String phoneNum;
-    String Email;
-    String userName;
-    String Pass;
+  public   String phoneNum;
+    public String Email;
+    public  String userName;
+    public  String Pass;
 
     public User(String phoneNum, String email, String userName, String pass) {
         this.phoneNum = phoneNum;
