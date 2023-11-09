@@ -1,3 +1,8 @@
+package Authentication;
+
+import Authentication.Login;
+import Authentication.Register;
+
 public class UserAuth_Controller {
     UserAuthentication userAuth;
     public UserAuthentication Descion(Boolean type){

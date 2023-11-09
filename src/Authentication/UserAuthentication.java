@@ -1,3 +1,7 @@
+package Authentication;
+
+import Authentication.Verification;
+
 public abstract class UserAuthentication {
     Verification verification;
 
