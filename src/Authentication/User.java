@@ -3,19 +3,31 @@ package Authentication;
 import Authentication.UserAuthentication;
 import DataBase.Account;
 
-public class User {
+public abstract class User {
     public UserAuthentication userAuth;
-    Account userAcc;
-  public   String phoneNum;
-    public String Email;
+   public Account userAcc;
     public  String userName;
     public  String Pass;
 
-    public User(String phoneNum, String email, String userName, String pass) {
-        this.phoneNum = phoneNum;
-        Email = email;
+
+
+    public User(String userName, String pass) {
+
         this.userName = userName;
         this.Pass=pass;
+    }
+    public void setAccountName(String AccountName){
+        this.userName=AccountName;
+    }
+    public void setPassWord(String PassWord){
+        this.Pass=PassWord;
+    }
+
+    public String getUserName(){
+        return userName;
+    }
+    public String getPass(){
+        return Pass;
     }
 
 }

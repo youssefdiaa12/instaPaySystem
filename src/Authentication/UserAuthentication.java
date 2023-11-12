@@ -1,10 +1,15 @@
 package Authentication;
 
-import Authentication.Verification;
+import java.io.IOException;
 
 public abstract class UserAuthentication {
-    Verification verification;
+    User user;
+   public Verification verification;
+    public void setUser(User user) {
+        this.user = user;
+    }
+    public abstract Boolean Perform_Authentication() throws IOException;
 
-    public abstract void Perform_Authentication(String email, String password);
+
 
 }
