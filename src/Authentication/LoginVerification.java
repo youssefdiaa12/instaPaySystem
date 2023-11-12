@@ -4,15 +4,18 @@ import Authentication.Verification;
 import DataBase.Db;
 import DataBase.LoginDB;
 
-public class LoginVerification implements Verification {
+import java.io.IOException;
 
-    LoginVerification(String userName, String password) {
-        LoginDB db = new LoginDB(userName, password);
-        Boolean is_found = db.user_exist();
-        if (is_found) {
-            System.out.println("You are successfully logged in");
-        } else {
-            System.out.println("You are not registered in our system");
-        }
+public class LoginVerification extends Verification {
+
+    public LoginVerification(User user) {
+        this.user = user;
+        db = new LoginDB(user);
+    }
+
+    @Override
+    public Boolean Found_in_Db() throws IOException {
+        Boolean is_found = db.readFromFile();
+        return is_found;
     }
 }
