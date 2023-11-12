@@ -4,11 +4,18 @@ import Authentication.Verification;
 import DataBase.Db;
 import DataBase.LoginDB;
 
-public class LoginVerification implements Verification {
-    public Boolean isValid(String email,String password){
+import java.io.IOException;
 
-        Db db = new LoginDB(email,password);
+public class LoginVerification extends Verification {
 
-        return null;
+    public LoginVerification(User user) {
+        this.user = user;
+        db = new LoginDB(user);
+    }
+
+    @Override
+    public Boolean Found_in_Db() throws IOException {
+        Boolean is_found = db.readFromFile();
+        return is_found;
     }
 }

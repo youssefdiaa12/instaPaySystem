@@ -1,55 +1,82 @@
-import Authentication.Login;
-import Authentication.Register;
-import Authentication.User;
+import Authentication.*;
+import DataBase.BankAccount;
+import DataBase.Db;
+import DataBase.WalletAccount;
 
+import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-     while (true){
+        while (true) {
 
-         System.out.println("Do you want to login or register?");
+            System.out.println("Do you want to login or register?");
             System.out.println("1-Login");
             System.out.println("2-Register");
             Scanner input = new Scanner(System.in);
             int choice = input.nextInt();
-            while (choice != 1 && choice != 2) {
-                System.out.println("Please enter a valid choice");
-                choice = input.nextInt();
-            }
-            if(choice==1){
-                System.out.println("Please enter your UserName");
-                String UserName=input.next();
-                System.out.println("Please enter your password");
-                String password=input.next();
-                User user=new User("","",UserName,password);
-                user.userAuth=new Login();
-                user.userAuth.Perform_Authentication(UserName,password);
 
-            }
-            else {
+            UserAuth_Controller userAuth_Controller = new UserAuth_Controller();
+            UserAuthentication userAuthentication = userAuth_Controller.Descion(choice);
+            String UserName = "", password = "";
+            User user = null;
+            if (choice == 1) {
                 System.out.println("Please enter your UserName");
-                String UserName=input.next();
+                 UserName = input.next();
                 System.out.println("Please enter your password");
-                String password=input.next();
+                 password = input.next();
+                user = new LoginUser(UserName, password);
+                userAuthentication.setUser(user);
+                user.userAuth = userAuthentication;
+                user.userAuth.Perform_Authentication();
+            }
+            else if (choice == 2) {
+                System.out.println("Register With");
+                System.out.println("1-Bank Account");
+                System.out.println("2-Wallet Account");
+                int choice2 = input.nextInt();
+                System.out.println("Please enter your UserName");
+                 UserName = input.next();
+                System.out.println("Please enter your password");
+                 password = input.next();
                 System.out.println("Please enter your phone number");
-                String phone=input.next();
-                System.out.println("Please enter your email");
-                String email=input.next();
-                User user=new User(phone,email,UserName,password);
-                Register register=new Register();
-                user.userAuth=register;
-                register.Perform_Adv_Authentication(email,password,phone,UserName);
+                String phone = input.next();
+                System.out.println("Please enter your Email");
+                String Email = input.next();
+                user = new RegisterUser(phone, Email, UserName, password);
+            user.userAuth = userAuthentication;
+               user.userAuth.setUser(user);
+                UserAccountController userAccountController = new UserAccountController();
+              user.userAcc=userAccountController.accCreator(choice2, phone, Email, UserName, password);
+                if (user.userAcc instanceof BankAccount) {
+                    System.out.println("Please enter your Bank Name");
+                    String BankName = input.next();
+                    System.out.println("Please enter your Bank ID");
+                    String BankID = input.next();
+                    ((BankAccount) user.userAcc).setBankName(BankName);
+                    ((BankAccount) user.userAcc).setBankId(BankID);
+                }
+                if (user.userAcc instanceof WalletAccount) {
+                    ((WalletAccount) user.userAcc).setPhoneNumber(phone);
+                }
+                user.userAuth.Perform_Authentication();
 
 
+            } else {
+                System.out.println("Please enter a valid choice");
+            }
+            if (user.userAuth instanceof Register) {
+                user.userAcc.setBalance(0);
+                user.userAcc.addAcc(user.userAcc);
+                user=new LoginUser(UserName,password);
+                user.userAcc.searchAcc(user);
+            } else {
+                user.userAcc.searchAcc(user);
 
             }
-
-
-
-     }
-
-
+        }
     }
 }
+

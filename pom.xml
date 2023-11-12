@@ -21,11 +21,7 @@
 
     <dependencies>
         <!-- Other dependencies -->
-        <dependency>
-            <groupId>com.twilio.sdk</groupId>
-            <artifactId>twilio</artifactId>
-            <version>8.0.1</version> <!-- Replace X.X with the latest version -->
-        </dependency>
+
 
     </dependencies>
 

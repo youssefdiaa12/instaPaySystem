@@ -1,17 +1,21 @@
 package Authentication;
 
-import Authentication.Login;
-import Authentication.Register;
-
+import java.io.IOException;
 public class UserAuth_Controller {
-    UserAuthentication userAuth;
-    public UserAuthentication Descion(Boolean type){
-        if (type) {
+
+        public UserAuth_Controller(){};
+    public UserAuthentication Descion(int type) throws IOException {
+
+        if (type==1) {
             return new Login();
-        } else if (!(type)) {
+        } else {
             return new Register();
         }
-        return null;
-
     }
+
+
+
+
+
+
 }

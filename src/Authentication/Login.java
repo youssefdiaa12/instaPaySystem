@@ -1,10 +1,20 @@
 package Authentication;
 
+import java.io.IOException;
+
 public class Login extends UserAuthentication {
+
+
     @Override
-    public void Perform_Authentication(String email, String password) {
-        verification= new LoginVerification();
-
-
+    public Boolean Perform_Authentication() throws IOException {
+        LoginVerification loginVerification = new LoginVerification(user);
+        if (loginVerification.Found_in_Db()) {
+            System.out.println("Login Successful");
+            return true;
+        }
+        else{
+            System.out.println("Login Failed");
+            return false;
+        }
     }
 }
