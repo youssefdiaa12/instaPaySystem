@@ -4,7 +4,6 @@ import Authentication.UserAuthentication;
 import DataBase.Account;
 
 public abstract class User {
-    public UserAuthentication userAuth;
    public Account userAcc;
     public  String userName;
     public  String Pass;
