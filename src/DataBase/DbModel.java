@@ -8,8 +8,8 @@ import Authentication.RegisterUser;
 import Authentication.User;
 
 public  class DbModel {
+    protected static DbModel dbModel;
     protected static User user;
-  public static DbModel instanceData;
     private static  final Vector<Account>accounts = new Vector<>();
 
     private static final Vector<User> loggedInUsers = new Vector<>();
@@ -17,7 +17,15 @@ public  class DbModel {
     public static boolean isUserLoggedIn(User user) {
         boolean isUserLoggedIn = false;
         for (User loggedInUser : loggedInUsers) {
-            if (Objects.equals(user.userName, loggedInUser.userName) && Objects.equals(user.Pass, loggedInUser.Pass)) {
+            if (Objects.equals(user.userName, loggedInUser.userName)) {
+                isUserLoggedIn = true;
+                break;
+            }
+            else if(user.userAcc instanceof  BankAccount  && loggedInUser.userAcc instanceof BankAccount && Objects.equals(user.userAcc.phoneNum, loggedInUser.userAcc.phoneNum)){
+                isUserLoggedIn = true;
+                break;
+            }
+            else if(user.userAcc instanceof  WalletAccount  && loggedInUser.userAcc instanceof WalletAccount && Objects.equals(user.userAcc.phoneNum, loggedInUser.userAcc.phoneNum)){
                 isUserLoggedIn = true;
                 break;
             }
@@ -26,6 +34,20 @@ public  class DbModel {
         return isUserLoggedIn;
 
     }
+
+    public boolean isFoundInstaPayAccount(String number,double amount){
+
+        for (Account account : accounts) {
+            System.out.println(account.phoneNum);
+            if (Objects.equals(account.phoneNum, number) &&account instanceof WalletAccount) {
+                account.setBalance(account.getBalance()+amount);
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     public static Account getAccountByName(String name){
         for (Account account : accounts) {
             if (Objects.equals(account.getUserName(), name)) {
@@ -43,7 +65,12 @@ public  class DbModel {
         accounts.add(account);
     }
 
-
+public static DbModel getInstance(){
+    if(dbModel==null){
+        dbModel=new DbModel();
+    }
+    return dbModel;
+}
 
 
 
