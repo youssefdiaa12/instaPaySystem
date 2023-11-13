@@ -36,7 +36,8 @@ public class main {
                     user = null;
                 }
 
-            } else if (choice == 2) {
+            }
+            else if (choice == 2) {
                 System.out.println("register with");
                 System.out.println("1-wallet account");
                 System.out.println("2-bank account");

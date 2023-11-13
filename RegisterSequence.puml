@@ -1,0 +1,56 @@
+@startuml
+actor User
+participant "System" as System
+participant UserAuth_Controller
+participant UserAuthentication
+participant UserAccountController
+participant Transfer
+database DbModel
+
+User -> System: Do you want to login or register?
+User -> System: 1-Login
+activate System
+
+User -> UserAuth_Controller: Decision(1)
+activate UserAuth_Controller
+
+UserAuth_Controller -> UserAuthentication: Create UserAuthentication
+activate UserAuthentication
+
+User -> System: Please enter your UserName
+User -> System: Please enter your password
+
+UserAuth_Controller -> UserAuthentication: Set User
+UserAuthentication -> UserAuthentication: Perform Authentication
+
+User -> System: Welcome user.userAcc.userName
+UserAuthentication -> DbModel: Add LoggedInUser
+DbModel --> UserAuthentication: User added
+
+deactivate UserAuth_Controller
+deactivate UserAuthentication
+
+System -> User: Welcome user.userAcc.userName
+
+User -> System: 1-Transfer to InstaPay wallet account
+
+User -> UserAuthentication: Set dbModel
+UserAuthentication -> Transfer: Create Transfer
+activate Transfer
+
+Transfer -> Transfer: Choose Transfer Strategy (InstaPay)
+Transfer -> System: Please enter the amount to be transferred
+
+Transfer --> UserAccountController: Get User Account Controller
+activate UserAccountController
+
+UserAccountController --> Transfer: User Account Controller
+
+Transfer -> UserAccountController: TransferToInstaPayWallet(amount)
+UserAccountController -> DbModel: Update Balance
+DbModel --> UserAccountController: Balance Updated
+
+deactivate Transfer
+deactivate UserAccountController
+
+@enduml
