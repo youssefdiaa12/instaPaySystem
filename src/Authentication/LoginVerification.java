@@ -13,9 +13,7 @@ public class LoginVerification extends Verification {
 
     @Override
     public Boolean Found_in_Db() throws IOException {
-        // User is logged in, perform any additional checks if needed
-        // ...
-        // User is not logged in
+
         if(DbModel.isUserLoggedIn(user)){
            user.userAcc= DbModel.getAccountByName(user.getUserName());
             return true;

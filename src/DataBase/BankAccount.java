@@ -21,6 +21,12 @@ public class BankAccount extends Account {
     public void setBankId(String bankId) {
         this.bankId = bankId;
     }
+    public String getBankName(){
+        return bankName;
+    }
+    public String getBankId(){
+        return bankId;
+    }
 
 
 }

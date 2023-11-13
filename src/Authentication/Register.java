@@ -12,7 +12,8 @@ public class Register extends UserAuthentication {
 
             RegisterVerification registerVerification= new RegisterVerification(user,dbModel);
             verification=registerVerification;
-            while(registerVerification.Found_in_Db()){
+            if(registerVerification.Found_in_Db()){
+                System.out.println("This username is already taken");
            return false;
             }
             while (!registerVerification.isValidEmail(((RegisterUser) user).getEmail())) {
@@ -37,7 +38,7 @@ public class Register extends UserAuthentication {
             System.out.println(e);
             System.out.println("An error occurred");
         }
-        return false;
+        return true;
     }
 
 }
