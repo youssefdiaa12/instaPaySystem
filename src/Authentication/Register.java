@@ -1,5 +1,7 @@
 package Authentication;
 
+import DataBase.DbModel;
+
 import java.util.Scanner;
 
 public class Register extends UserAuthentication {
@@ -8,13 +10,10 @@ public class Register extends UserAuthentication {
     public Boolean Perform_Authentication() {
         try {
 
-            RegisterVerification registerVerification= new RegisterVerification(user);
+            RegisterVerification registerVerification= new RegisterVerification(user,dbModel);
             verification=registerVerification;
             while(registerVerification.Found_in_Db()){
-                System.out.println("This user is already registered");
-                System.out.println("please make sure that your data not used before or try to login");
-                String user_input = new Scanner(System.in).next();
-                user.setAccountName(user_input);
+           return false;
             }
             while (!registerVerification.isValidEmail(((RegisterUser) user).getEmail())) {
                 System.out.println("Please enter a valid email");
@@ -31,18 +30,6 @@ public class Register extends UserAuthentication {
                 String phoneNum = new Scanner(System.in).next();
                 ((RegisterUser) user).setPhoneNum(phoneNum);
             }
-
-                System.out.println("Please enter the OTP sent to your number");
-                String user_input = new Scanner(System.in).next();
-                if (registerVerification.verfyOtp(user_input)) {
-                    registerVerification.writeToFile();
-                    System.out.println("You are successfully registered");
-                    return true;
-
-                } else {
-                    System.out.println("You have entered wrong OTP");
-                    return false;
-                }
 
 
         }

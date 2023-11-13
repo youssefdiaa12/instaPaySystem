@@ -1,21 +1,27 @@
 package Authentication;
+import DataBase.DbModel;
 
-import Authentication.Verification;
-import DataBase.Db;
-import DataBase.LoginDB;
 
 import java.io.IOException;
 
 public class LoginVerification extends Verification {
 
-    public LoginVerification(User user) {
+    public LoginVerification(User user, DbModel userDatabase) {
+        super(userDatabase);
         this.user = user;
-        db = new LoginDB(user);
     }
 
     @Override
     public Boolean Found_in_Db() throws IOException {
-        Boolean is_found = db.readFromFile();
-        return is_found;
+        // User is logged in, perform any additional checks if needed
+        // ...
+        // User is not logged in
+        if(DbModel.isUserLoggedIn(user)){
+           user.userAcc= DbModel.getAccountByName(user.getUserName());
+            return true;
+        }
+
+        return DbModel.isUserLoggedIn(user);
     }
 }
+

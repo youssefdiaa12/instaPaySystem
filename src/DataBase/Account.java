@@ -23,6 +23,19 @@ public abstract class Account {
     public void setBalance(double balance){
           this.balance=balance;
      }
-    public abstract void addAcc(Account account);
-   public abstract void searchAcc(User user);
+   public String getUserName(){
+        return userName;
+    }
+    public String getPass(){
+        return Pass;
+   }
+    public double getBalance(){
+        return balance;
+    }
+    public String getPhoneNum(){
+        return phoneNum;
+    }
+    public String getEmail(){
+        return Email;
+    }
 }
