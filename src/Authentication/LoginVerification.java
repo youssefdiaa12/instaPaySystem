@@ -19,7 +19,7 @@ public class LoginVerification extends Verification {
             return true;
         }
 
-        return DbModel.isUserLoggedIn(user);
+        return false;
     }
 }
 

@@ -1,8 +1,8 @@
 package Features;
 
-public interface Bill {
+public abstract class Bill {
 
 
-    public  void payBill(double amount);
+    public abstract void payBill(double amount);
 
 }

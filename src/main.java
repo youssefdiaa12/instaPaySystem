@@ -1,5 +1,6 @@
 import Authentication.*;
 import DataBase.BankAccount;
+import DataBase.BankApi;
 import DataBase.DbModel;
 import DataBase.WalletAccount;
 import Features.*;
@@ -39,6 +40,8 @@ public class main {
                 System.out.println("2-bank account");
                 int type = input.nextInt();
                 String accountNumber = null, BankName = null;
+                String bankPassword= null;
+                BankApi bankApi;
                 while (type != 1 && type != 2) {
                     System.out.println("Please enter a valid choice");
                     type = input.nextInt();
@@ -48,6 +51,10 @@ public class main {
                     accountNumber = input.next();
                     System.out.println("Please enter your bank name");
                     BankName = input.next();
+                    System.out.println("Please enter your bank password");
+                     bankPassword = input.next();
+                     bankApi = new BankApi();
+                     userAuthentication.bankApi = bankApi;
                 }
 
                 UserAccountController userAccountController = new UserAccountController();
@@ -67,10 +74,10 @@ public class main {
                     if (type == 2) {
                         ((BankAccount) user.userAcc).setBankId(accountNumber);
                         ((BankAccount) user.userAcc).setBankName(BankName);
+                        ((BankAccount) user.userAcc).setBankPass(bankPassword);
                     } else {
                         ((WalletAccount) user.userAcc).setPhoneNumber(phoneNumber);
                     }
-
                 }
                 // User is successfully registered
                 else {
@@ -128,16 +135,14 @@ public class main {
                             }
 
                             Transfer transfer = new Transfer(new BankAccountTransfer(user, userAuthentication.verification.dbModel));
-                            ;
-                            TransferStratgy obj = transfer.getTransferStratgy();
                             System.out.println("Please enter the amount to be transferred");
                             double amount = input.nextDouble();
                             if (transferChoice == 1) {
-                                obj.transferToInstaPayWallet(amount);
+                               transfer.transferingToInstaWallet(amount);
                             } else if (transferChoice == 2) {
-                                obj.transferToAnotherWallet(amount);
+                                transfer.transferingToAnotherWallet(amount);
                             } else {
-                                ((BankAccountTransfer) obj).TransferToBankAccount(amount);
+                                transfer.transferingToAnotherBank(amount);
                             }
                         } else {
                             System.out.println("1-Electricity Bill");
@@ -170,7 +175,8 @@ public class main {
                                 billingSystem.payBill(50);
                             }
                         }
-                    } else {
+                    }
+                    else {
                         System.out.println("1-Transferring");
                         System.out.println("2-Billing");
                         System.out.println("3- about my balance");
@@ -238,20 +244,18 @@ public class main {
                                 break;
                             }
                             Transfer transfer = new Transfer(new WalletAccountTransfer(user, userAuthentication.verification.dbModel));
-                            TransferStratgy obj = transfer.getTransferStratgy();
                             System.out.println("Please enter the amount to be transferred");
                             double amount = input.nextDouble();
                             if (transferChoice == 1) {
-                                obj.transferToInstaPayWallet(amount);
+                                transfer.transferingToInstaWallet(amount);
                             } else {
-                                obj.transferToAnotherWallet(amount);
+                              transfer.transferingToAnotherWallet(amount);
                             }
                         }
                     }
                 }
 
             }
-
         }
     }
 }
