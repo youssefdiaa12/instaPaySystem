@@ -7,6 +7,7 @@ import Features.*;
 import java.io.IOException;
 import java.util.Scanner;
 
+
 public class main {
     public static void main(String[] args) throws IOException {
 
@@ -127,9 +128,9 @@ public class main {
                                 continue;
                             }
 
-                            Transfer transfer = new Transfer(new BankAccountTransfer(user, userAuthentication.verification.dbModel));
+                            TransferStratgy transfer = new BankAccountTransfer(user, userAuthentication.verification.dbModel)
                             ;
-                            TransferStratgy obj = transfer.getTransferStratgy();
+                            TransferStratgy obj = transfer;
                             System.out.println("Please enter the amount to be transferred");
                             double amount = input.nextDouble();
                             if (transferChoice == 1) {
@@ -237,8 +238,8 @@ public class main {
                             if (transferChoice == 4) {
                                 break;
                             }
-                            Transfer transfer = new Transfer(new WalletAccountTransfer(user, userAuthentication.verification.dbModel));
-                            TransferStratgy obj = transfer.getTransferStratgy();
+                           TransferStratgy transfer = new WalletAccountTransfer(user, userAuthentication.verification.dbModel);
+                            TransferStratgy obj = transfer;
                             System.out.println("Please enter the amount to be transferred");
                             double amount = input.nextDouble();
                             if (transferChoice == 1) {
