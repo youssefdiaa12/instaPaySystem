@@ -14,7 +14,7 @@ public class BankAccountTransfer extends TransferStratgy{
         if(user.userAcc.getBalance()>=amount) {
             if (amount > 0) {
                 user.userAcc.setBalance(user.userAcc.getBalance() - amount);
-                System.out.println("Transfered to bank account successfully");
+                System.out.println("Transferred to bank account successfully");
             } else {
                 System.out.println("Invalid amount");
             }

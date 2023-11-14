@@ -3,6 +3,7 @@ package Features;
 import Authentication.User;
 import DataBase.DbModel;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public abstract class TransferStratgy {
@@ -18,13 +19,16 @@ public abstract class TransferStratgy {
     public void transferToInstaPayWallet(double amount) {
         if (user.userAcc.getBalance() >= amount) {
             if (amount > 0) {
-                System.out.println("Pleae enter the phone number of the wallet you want to transfer to");
+                System.out.println("Please enter the phone number of the wallet you want to transfer to");
                 Scanner input = new Scanner(System.in);
                 String phoneNumber = input.next();
                 if(dbModel.isFoundInstaPayAccount(phoneNumber,amount))
                 {
                     user.userAcc.setBalance(user.userAcc.getBalance() - amount);
-                    System.out.println("Transfered to wallet successfully");
+                    System.out.println("Transferred to wallet successfully");
+                }
+                else if (Objects.equals(user.userAcc.getPhoneNum(), phoneNumber)){
+                    System.out.println("You can't transfer to your own wallet");
                 }
                 else{
                     System.out.println("This phone number is not registered in InstaPay");

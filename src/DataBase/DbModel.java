@@ -38,7 +38,6 @@ public  class DbModel {
     public boolean isFoundInstaPayAccount(String number,double amount){
 
         for (Account account : accounts) {
-            System.out.println(account.phoneNum);
             if (Objects.equals(account.phoneNum, number) &&account instanceof WalletAccount) {
                 account.setBalance(account.getBalance()+amount);
                 return true;

@@ -128,8 +128,7 @@ public class main {
                                 continue;
                             }
 
-                            TransferStratgy transfer = new BankAccountTransfer(user, userAuthentication.verification.dbModel)
-                            ;
+                            TransferStratgy transfer = new BankAccountTransfer(user, userAuthentication.verification.dbModel);
                             TransferStratgy obj = transfer;
                             System.out.println("Please enter the amount to be transferred");
                             double amount = input.nextDouble();
