@@ -1,6 +1,6 @@
 package Features;
 
-public class ElectricityBilling implements Bill {
+public class ElectricityBilling extends Bill {
 
     @Override
     public void payBill(double amount) {

@@ -15,7 +15,6 @@ public class Login extends UserAuthentication {
             return true;
         }
         else{
-            System.out.println("Login Failed");
             return false;
         }
     }

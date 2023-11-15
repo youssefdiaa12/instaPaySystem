@@ -16,15 +16,9 @@ public class RegisterVerification extends Verification {
 
     @Override
     public Boolean Found_in_Db() throws IOException {
-        if (DbModel.isUserLoggedIn(user)) {
-            // User is already registered and logged in
-            System.out.println("This user is already registered.");
-            return true;
-        } else {
-            boolean isFound = otpVerification();
-          return   !isFound;
-
-        }
+        // User is already registered and logged in
+        return DbModel.isUserRegisteredBefore(user);
+            // User is not registered
     }
     public boolean otpVerification() {
         String otp = "123456";
