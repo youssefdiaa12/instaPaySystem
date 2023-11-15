@@ -7,10 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="your-project-name" />
+        <module name="instaPaySystem" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="instaPaySystem" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

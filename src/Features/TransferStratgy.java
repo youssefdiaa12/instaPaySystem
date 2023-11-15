@@ -22,14 +22,15 @@ public abstract class TransferStratgy {
                 System.out.println("Please enter the phone number of the wallet you want to transfer to");
                 Scanner input = new Scanner(System.in);
                 String phoneNumber = input.next();
-                if(dbModel.isFoundInstaPayAccount(phoneNumber,amount))
+                if (Objects.equals(user.userAcc.getPhoneNum(), phoneNumber)){
+                    System.out.println("You can't transfer to your own wallet");
+                }
+                else if(dbModel.isFoundInstaPayAccount(phoneNumber,amount))
                 {
                     user.userAcc.setBalance(user.userAcc.getBalance() - amount);
                     System.out.println("Transferred to wallet successfully");
                 }
-                else if (Objects.equals(user.userAcc.getPhoneNum(), phoneNumber)){
-                    System.out.println("You can't transfer to your own wallet");
-                }
+
                 else{
                     System.out.println("This phone number is not registered in InstaPay");
                 }
